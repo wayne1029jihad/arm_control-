@@ -4,10 +4,10 @@
 #include "std_msgs/String.h"
 #include "ros/ros.h"
 #include "std_msgs/Int16.h"
-#include "std_msgs/Int32MultiArray.h"
+#include "std_msgs/Float32MultiArray.h"
   
 //typedef void (*chatterCallback) (const std_msgs::Int16::ConstPtr& msg);
-void chatterCallback(const std_msgs::Int32MultiArray::ConstPtr& msg);
+void chatterCallback(const std_msgs::Float32MultiArray::ConstPtr& msg);
 void ROSreciver(int argc , char **argv)
     {
         ros::init(argc ,argv, "reciver");

@@ -1,7 +1,7 @@
 #include "ros/ros.h"
 #include "std_msgs/String.h"
 #include "std_msgs/Int16.h"
-#include "std_msgs/Int32MultiArray.h"
+#include "std_msgs/Float32MultiArray.h"
 #include "stdio.h"
 #include <sstream>
 
@@ -47,7 +47,7 @@ int main(int argc, char **argv)
    * than we can send them, the number here specifies how many messages to
    * buffer up before throwing some away.
    */
-  ros::Publisher chatter_pub = n.advertise<std_msgs::Int32MultiArray>("chatter", 1000);
+  ros::Publisher chatter_pub = n.advertise<std_msgs::Float32MultiArray>("chatter", 1000);
 
   ros::Rate loop_rate(10);
 
@@ -56,8 +56,8 @@ int main(int argc, char **argv)
    * a unique string for each message.
    */
   int count = 0;
-  int command = 0,x,y,z;  
-  int com[4];
+  float command = 0,x,y,z;  
+  float com[4];
   while (ros::ok())
   {
     /**
@@ -65,19 +65,19 @@ int main(int argc, char **argv)
      */
     std_msgs::String msg;
     std_msgs::Int16 x;
-    std_msgs::Int32MultiArray arr;
+    std_msgs::Float32MultiArray arr;
     std::stringstream ss;
     
     arr.data.clear();
     for(int i = 0; i < 4; i ++)
     {
-        scanf("%d",&com[i]);
+        scanf("%f",&com[i]);
         arr.data.push_back(com[i]);
     }
 
    
     //arr.data = &com;
-    ROS_INFO("%d", com[0]);
+    ROS_INFO("%f", com[0]);
 
     /**
      * The publish() function is how you send messages. The parameter
