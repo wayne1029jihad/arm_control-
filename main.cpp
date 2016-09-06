@@ -1,3 +1,5 @@
+//this code for blue_detect to control arm 
+
 #include <vector>
 #include <iostream>
 #include <stdint.h>
@@ -5,12 +7,8 @@
 #include "armDriver.h"
 #include "rosReciever.h"
 #include "ros/ros.h"
-#include "std_msgs/String.h"
+#include "unistd.h"
 
-#include "std_msgs/MultiArrayLayout.h"
-#include "std_msgs/MultiArrayDimension.h"
-#include "std_msgs/Int32MultiArray.h"
-#include "std_msgs/Float32MultiArray.h"
 static ArmDriver *p_armDriver = NULL;
 
 void chatterCallback(const std_msgs::Float32MultiArray::ConstPtr& msg)
@@ -25,10 +23,12 @@ void chatterCallback(const std_msgs::Float32MultiArray::ConstPtr& msg)
     }
 
         if(com[0] == 100){              
-            p_armDriver->moveMode(com[1],com[2],com[3],3);
-        }
+           p_armDriver->moveMode(com[1],com[2],20,3);    
+            sleep(1);
+           p_armDriver->moveMode(com[1],com[2],com[3],3); 
+         }
         else if(com[0]==200){
-            p_armDriver->moveMode(com[1],com[2],com[3],6);
+           p_armDriver->moveMode(com[1],com[2],com[3],6);
         }   
         else if ( com[0] >=0 && com[0] <= 10){
             p_armDriver->changeArmStatus(LINEAR, (Action)com[0], 100);
